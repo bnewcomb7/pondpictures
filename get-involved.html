@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get involved with The Yawgoog Story documentary — share your story or join the production team.">
+  <title>Get Involved | The Yawgoog Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-banner">
+    <img src="images/splash.png" alt="Historical panorama of Camp Yawgoog" class="banner-image" width="1600" height="400">
+  </header>
+
+  <nav class="tab-nav" aria-label="Main navigation">
+    <div class="tab-nav-inner">
+      <a href="index.html" class="tab-nav-logo">
+        <img src="images/logo.png" alt="Pond Pictures" width="140" height="36">
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="tab-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="who-am-i.html">Who Am I?</a></li>
+        <li><a href="get-involved.html" class="active">Get Involved</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="qa.html">Q &amp; A</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="page-content">
+    <div class="container">
+      <header class="page-title-block">
+        <h1>Get Involved</h1>
+        <p class="page-lead">Scouts, adult leaders, former staff, local talent — and anyone with photos, videos, or testimony about Camp Yawgoog.</p>
+      </header>
+
+      <div class="involved-grid">
+        <aside class="involved-sidebar">
+          <div class="contact-info-compact">
+            <h2>Contact</h2>
+            <ul class="contact-details">
+              <li>
+                <strong>Caleb McPhee</strong><br>
+                Producer, Pond Pictures LLC
+              </li>
+              <li><a href="mailto:cmcphee10991@gmail.com">cmcphee10991@gmail.com</a></li>
+              <li><a href="tel:+14016038887">401-603-8887</a></li>
+              <li><a href="https://x.com/PondPictures" target="_blank" rel="noopener noreferrer">@PondPictures on X</a></li>
+            </ul>
+          </div>
+
+          <div class="embed-card embed-card-compact">
+            <h2>Follow on X</h2>
+            <div class="twitter-embed-container">
+              <a
+                class="twitter-timeline"
+                data-height="420"
+                data-theme="light"
+                data-chrome="noheader nofooter"
+                href="https://twitter.com/PondPictures"
+              >
+                Posts by @PondPictures
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <h2>Send a Message</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="interest">I want to help with</label>
+              <select id="interest" name="interest">
+                <option value="Creating the documentary">Creating the documentary</option>
+                <option value="Sharing photos or videos">Sharing photos or videos</option>
+                <option value="Sharing written testimony">Sharing written testimony</option>
+                <option value="Fundraising or grants">Fundraising or grants</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Optional subject">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" required placeholder="Tell us about yourself and how you'd like to contribute…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Pond Pictures LLC &middot; pondpicturesri.com</p>
+      <img src="images/rooster.png" alt="" class="footer-mascot-inline" width="48" height="36" aria-hidden="true">
+    </div>
+  </footer>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script src="js/config.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
