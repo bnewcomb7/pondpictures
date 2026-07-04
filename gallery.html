@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Historical photo gallery from Camp Yawgoog — brochures, photos, and archives.">
+  <title>Gallery | The Yawgoog Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-banner">
+    <img src="images/splash.png" alt="Historical panorama of Camp Yawgoog" class="banner-image" width="1600" height="400">
+  </header>
+
+  <nav class="tab-nav" aria-label="Main navigation">
+    <div class="tab-nav-inner">
+      <a href="index.html" class="tab-nav-logo">
+        <img src="images/logo.png" alt="Pond Pictures" width="140" height="36">
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="tab-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="who-am-i.html">Who Am I?</a></li>
+        <li><a href="get-involved.html">Get Involved</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="qa.html">Q &amp; A</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="page-content">
+    <div class="container container-wide">
+      <header class="page-title-block">
+        <h1>Image Gallery</h1>
+        <p class="page-lead">Historical photos and documents from Camp Yawgoog. Click any image to view it full size.</p>
+      </header>
+
+      <div class="gallery-scroll" id="gallery-grid" role="list"></div>
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&lsaquo;</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Next image">&rsaquo;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="">
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Pond Pictures LLC &middot; pondpicturesri.com</p>
+      <img src="images/rooster.png" alt="" class="footer-mascot-inline" width="48" height="36" aria-hidden="true">
+    </div>
+  </footer>
+
+  <script src="js/gallery-data.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
