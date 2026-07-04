@@ -481,6 +481,13 @@ a:hover { color: var(--forest); }
 
 /* Gallery — vertical scroll feed */
 
+.gallery-status {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+}
+
 .gallery-scroll {
   display: flex;
   flex-direction: column;

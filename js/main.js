@@ -110,7 +110,7 @@ contactForm?.addEventListener("submit", async (e) => {
   }
 });
 
-/* ── Gallery lightbox ── */
+/* ── Gallery lightbox + Google Drive loader ── */
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
@@ -118,17 +118,106 @@ const lightboxCaption = document.getElementById("lightbox-caption");
 let currentGalleryIndex = 0;
 let galleryItems = [];
 
+/**
+ * Build image URLs from a Drive file ID.
+ * lh3.googleusercontent.com is far more reliable than the old uc?export=view URL.
+ * Append =wNNNN to request a resized version.
+ */
+function driveThumb(id, width = 800) {
+  return `https://lh3.googleusercontent.com/d/${id}=w${width}`;
+}
+function driveFull(id, width = 1600) {
+  return `https://lh3.googleusercontent.com/d/${id}=w${width}`;
+}
+
+function setGalleryStatus(message) {
+  const el = document.getElementById("gallery-status");
+  if (el) el.textContent = message || "";
+}
+
+/** Fetch the image list from the shared Drive folder via the Drive API. */
+async function loadDriveGallery() {
+  const grid = document.getElementById("gallery-grid");
+  if (!grid) return;
+
+  // No key configured → fall back to whatever is in GALLERY_IMAGES.
+  if (
+    typeof DRIVE_CONFIG === "undefined" ||
+    !DRIVE_CONFIG.apiKey ||
+    !DRIVE_CONFIG.folderId ||
+    DRIVE_CONFIG.apiKey.startsWith("PASTE_")
+  ) {
+    useFallbackGallery();
+    return;
+  }
+
+  setGalleryStatus("Loading photos…");
+
+  const params = new URLSearchParams({
+    q: `'${DRIVE_CONFIG.folderId}' in parents and mimeType contains 'image/' and trashed = false`,
+    fields: "files(id, name, description)",
+    orderBy: "name",
+    pageSize: "1000",
+    key: DRIVE_CONFIG.apiKey,
+  });
+
+  try {
+    const res = await fetch(`https://www.googleapis.com/drive/v3/files?${params}`);
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error?.message || `HTTP ${res.status}`);
+    }
+    if (!data.files || data.files.length === 0) {
+      throw new Error("No images found in the Drive folder.");
+    }
+
+    galleryItems = data.files.map((file) => ({
+      thumb: driveThumb(file.id, 800),
+      full: driveFull(file.id, 1600),
+      // Use the file's Drive "description" as caption if set, else the filename.
+      caption: file.description?.trim() || file.name.replace(/\.[^.]+$/, ""),
+    }));
+
+    renderGallery();
+    setGalleryStatus("");
+  } catch (err) {
+    console.error("Drive gallery failed:", err);
+    useFallbackGallery(err.message);
+  }
+}
+
+function useFallbackGallery(reason) {
+  if (typeof GALLERY_IMAGES !== "undefined" && GALLERY_IMAGES.length) {
+    // Support both the old {src, fullUrl} shape and the new {thumb, full} shape.
+    galleryItems = GALLERY_IMAGES.map((item) => ({
+      thumb: item.thumb || item.src,
+      full: item.full || item.fullUrl || item.src,
+      caption: item.caption || "",
+    }));
+    renderGallery();
+    setGalleryStatus(
+      reason ? "Showing saved photos (live album unavailable)." : ""
+    );
+  } else {
+    setGalleryStatus(
+      reason
+        ? `Couldn't load the photo album: ${reason}`
+        : "No photos available yet."
+    );
+  }
+}
+
 function renderGallery() {
   const grid = document.getElementById("gallery-grid");
-  if (!grid || typeof GALLERY_IMAGES === "undefined") return;
-
-  galleryItems = GALLERY_IMAGES;
+  if (!grid) return;
 
   grid.innerHTML = galleryItems
     .map(
       (item, index) => `
       <button class="gallery-item" type="button" data-index="${index}" aria-label="View: ${item.caption}">
-        <img src="${item.thumb}" alt="${item.caption}" loading="lazy">
+        <img src="${item.thumb}" alt="${item.caption}" loading="lazy"
+             onerror="this.parentElement.style.display='none'">
         <span class="gallery-item-caption">${item.caption}</span>
       </button>
     `
@@ -142,7 +231,6 @@ function renderGallery() {
 
 function openLightbox(index) {
   if (!lightbox || !lightboxImg) return;
-
   currentGalleryIndex = index;
   const item = galleryItems[index];
   lightboxImg.src = item.full;
@@ -159,6 +247,7 @@ function closeLightbox() {
 }
 
 function navigateLightbox(direction) {
+  if (!galleryItems.length) return;
   currentGalleryIndex =
     (currentGalleryIndex + direction + galleryItems.length) % galleryItems.length;
   openLightbox(currentGalleryIndex);
@@ -180,5 +269,5 @@ document.addEventListener("keydown", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderGallery();
+  loadDriveGallery();
 });

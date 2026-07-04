@@ -43,8 +43,8 @@
         <p class="page-lead">Historical photos and documents from Camp Yawgoog. Click any image to view it full size.</p>
       </header>
 
-      <div class="gallery-scroll" id="gallery-grid" role="list"></div>
-    </div>
+    <div class="gallery-scroll" id="gallery-grid" role="list"></div>
+    <p class="gallery-status" id="gallery-status" role="status" aria-live="polite"></p>
   </main>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
@@ -64,6 +64,13 @@
     </div>
   </footer>
 
+  <script>
+    // ── Google Drive gallery config ──
+    const DRIVE_CONFIG = {
+      apiKey: "AIzaSyD9jcpmdUS7o8BexGOaR5WqvNRhCHyJMlI",
+      folderId: "1v4ZiiO91rFNkh-IbYsL6GDbIT3PfdGp_",
+    };
+  </script>
   <script src="js/gallery-data.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/main.js"></script>
