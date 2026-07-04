@@ -10,6 +10,221 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="images/logo.png" type="image/png">
+
+  <!-- Home page only: scoped styles for the redesigned content below the nav -->
+  <style>
+    /* Lead / hero intro */
+    .home-hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .home-hero .eyebrow {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--forest-light);
+      margin-bottom: 1rem;
+    }
+    .home-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.15;
+      color: var(--forest-dark);
+      margin-bottom: 1.25rem;
+    }
+    .home-hero .lead {
+      font-size: 1.1875rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .home-hero .lead:last-child { margin-bottom: 0; }
+
+    /* Postcard stack */
+    .postcard-stack {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 380px;
+    }
+    .postcard {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--white);
+    }
+    .postcard img { display: block; width: 100%; height: auto; }
+    .postcard-back {
+      position: absolute;
+      top: 8%;
+      right: 6%;
+      width: 62%;
+      transform: rotate(6deg);
+      z-index: 1;
+      opacity: 0.97;
+    }
+    .postcard-front {
+      position: relative;
+      width: 78%;
+      transform: rotate(-3deg);
+      z-index: 2;
+      transition: transform var(--transition);
+    }
+    .postcard-front:hover { transform: rotate(-1deg) translateY(-4px); }
+
+    /* Section framing */
+    .home-section { margin: 4rem 0; }
+    .home-section-head {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+    .home-section-head .label {
+      display: inline-block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--forest-light);
+      margin-bottom: 0.75rem;
+    }
+    .home-section-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      color: var(--forest-dark);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .home-section-head p { color: var(--text-muted); }
+
+    /* "Why a documentary" feature cards */
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .why-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+      border-top: 4px solid var(--gold);
+    }
+    .why-card .why-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      color: var(--forest);
+    }
+    .why-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1875rem;
+      color: var(--forest-dark);
+      margin-bottom: 0.5rem;
+    }
+    .why-card p { color: var(--text-muted); font-size: 0.9875rem; }
+
+    /* Help / get-involved cards */
+    .help-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+    .help-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--forest-light);
+      display: flex;
+      flex-direction: column;
+    }
+    .help-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--forest-dark);
+      margin-bottom: 0.75rem;
+    }
+    .help-card p { color: var(--text-muted); margin-bottom: 1.5rem; }
+    .help-card .help-cta {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--forest);
+    }
+    .help-card .help-cta:hover { color: var(--gold); }
+
+    /* Closing call-to-action band */
+    .home-cta {
+      margin: 4rem 0 1rem;
+      background: var(--forest-dark);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--cream);
+    }
+    .home-cta img {
+      max-height: 150px;
+      width: auto;
+      margin: 0 auto 1.5rem;
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.3));
+    }
+    .home-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+      margin-bottom: 0.75rem;
+    }
+    .home-cta p {
+      max-width: 560px;
+      margin: 0 auto 1.75rem;
+      color: rgba(247, 243, 235, 0.85);
+    }
+    .home-cta .btn-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform var(--transition), background var(--transition), color var(--transition);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--forest-dark); }
+    .btn-gold:hover { background: #d4b36a; color: var(--forest-dark); }
+    .btn-ghost { background: transparent; color: var(--cream); border-color: rgba(255,255,255,0.5); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--white); border-color: var(--white); }
+
+    @media (max-width: 860px) {
+      .home-hero { grid-template-columns: 1fr; gap: 2rem; }
+      .postcard-stack { min-height: 320px; order: -1; }
+    }
+  </style>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
@@ -38,48 +253,119 @@
 
   <main id="main" class="page-content">
     <div class="container">
-      <div class="home-grid">
-        <div class="home-intro">
-          <p>
-            In 1965, J. Harold Williams wrote Part 1 of
-            <a href="documents/the-yawgoog-story.pdf" target="_blank" rel="noopener noreferrer"><em>The Yawgoog Story</em></a>,
-            the history of Camp Yawgoog from its founding in 1916 to the present. Several additions have since been attempted, but in reality it will take all of us to tell the complete history of this camp.
-          </p>
-          <p>
-            In April of 2026, Rhode Island Boy Scouts (the owners of the property) approved a documentary series and book to be produced independently, financed through them. Why a documentary?
-          </p>
-          <p><em>Accessibility</em> — More people will watch a documentary, with a companion book if they want more.</p>
-          <p><em>Funded</em> — Paying for the work to be done makes it more possible to happen.</p>
-          <p><em>Preservation</em> — Something to record testimonies for, amass more historical records (including visual).</p>
-          <p>
-            Pond Pictures LLC was established by Caleb McPhee for the purpose of this production, and needs your help to make &ldquo;The Yawgoog Story&rdquo; possible, just as it took hundreds of passionate, hard-working individuals to not just make Camp Yawgoog what it is, but to keep and improve what it is for over 100 years. In particular we&rsquo;re looking for:
-          </p>
 
-          <div class="callout-cards">
-            <article class="callout-card">
-              <h2>People to Create This With</h2>
-              <p>Filmmakers, writers, artists, musicians, but also fundraisers, grant writers and business folks.</p>
-            </article>
-            <article class="callout-card">
-              <h2>People With the Story</h2>
-              <p>Those with pictures, videos, written testimony, and connections to those who may have that material.</p>
-            </article>
-          </div>
+      <!-- Hero intro -->
+      <section class="home-hero">
+        <div>
+          <span class="eyebrow">Authorized by Rhode Island Boy Scouts</span>
+          <h1>Let&rsquo;s finally tell the whole&nbsp;story.</h1>
+          <p class="lead">
+            <em>The Yawgoog Story</em> is a documentary series and companion book chronicling
+            more than a century of Camp Yawgoog — from its founding in 1916 to today.
+          </p>
+          <p class="lead">
+            In 1965, J. Harold Williams wrote Part 1 of
+            <a href="documents/the-yawgoog-story.pdf" target="_blank" rel="noopener noreferrer"><em>The Yawgoog Story</em></a>.
+            Others have tried to continue it since — but telling this camp&rsquo;s full history
+            is a job too big for any one person. It&rsquo;s going to take all of us.
+          </p>
         </div>
 
-        <aside class="postcard-stack" aria-label="Documentary postcards">
-          <figure class="postcard postcard-front">
-            <img src="images/the_yawgoog_story.png" alt="The Yawgoog Story — documentary postcard (front)" width="420" height="530" loading="eager">
-          </figure>
+        <aside class="postcard-stack" aria-label="The Yawgoog Story documentary postcards">
           <figure class="postcard postcard-back">
-            <img src="images/whole_story.png" alt="The Yawgoog Story — postcard (back)" width="420" height="530" loading="lazy">
+            <img src="images/whole_story.png" alt="The Yawgoog Story — postcard back" width="420" height="530" loading="lazy">
+          </figure>
+          <figure class="postcard postcard-front">
+            <img src="images/the_yawgoog_story.png" alt="The Yawgoog Story — documentary postcard front" width="420" height="530" loading="eager">
           </figure>
         </aside>
-      </div>
+      </section>
 
-      <figure class="home-feature-illustration">
-        <img src="images/making%20a%20movie.png" alt="We're makin' a mooooovie!! — filmmaker illustration" width="480" height="320">
-      </figure>
+      <!-- Why a documentary -->
+      <section class="home-section">
+        <div class="home-section-head">
+          <span class="label">Our Approach</span>
+          <h2>Why a documentary?</h2>
+          <p>
+            In April 2026, Rhode Island Boy Scouts — the owners of the property — approved an
+            independently produced documentary series and book, financed through the Council.
+            Here&rsquo;s why film is the right way to preserve this history.
+          </p>
+        </div>
+
+        <div class="why-cards">
+          <article class="why-card">
+            <div class="why-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+            <h3>Accessible</h3>
+            <p>Far more people will watch a film than read a book — with a companion book ready for those who want to go deeper.</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>Funded</h3>
+            <p>Paying skilled people to do this work properly is what makes it realistic — and gives it the best chance of actually being finished.</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Preservation</h3>
+            <p>A reason to record testimonies now, and to gather and safeguard historical records — photos, film, and documents — before they&rsquo;re lost.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- How you can help -->
+      <section class="home-section">
+        <div class="home-section-head">
+          <span class="label">Get Involved</span>
+          <h2>We can&rsquo;t do this without you</h2>
+          <p>
+            Pond Pictures LLC was founded by Caleb McPhee to produce this series — but it took
+            hundreds of dedicated people to build Camp Yawgoog and keep it thriving for over 100
+            years. Telling its story is no different. Here&rsquo;s where you come in.
+          </p>
+        </div>
+
+        <div class="help-cards">
+          <article class="help-card">
+            <h3>Help create it</h3>
+            <p>
+              We&rsquo;re assembling a team: filmmakers, writers, artists, and musicians — plus
+              fundraisers, grant writers, and business-minded folks to keep the project on solid footing.
+              If you have a skill to lend, we want to hear from you.
+            </p>
+            <a href="get-involved.html" class="help-cta">Join the team &rarr;</a>
+          </article>
+          <article class="help-card">
+            <h3>Share your piece of the story</h3>
+            <p>
+              Do you have old photographs, home movies, or written memories of Yawgoog tucked away —
+              or know someone who does? Every picture, recording, and recollection helps us tell the
+              whole story. No contribution is too small.
+            </p>
+            <a href="get-involved.html" class="help-cta">Share your story &rarr;</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Closing call to action -->
+      <section class="home-cta">
+        <img src="images/making%20a%20movie.png" alt="We're makin' a moooovie! — filmmaker illustration">
+        <h2>Ready to be part of it?</h2>
+        <p>
+          Whether you want to help make the film or simply share what you remember,
+          your part matters. Let&rsquo;s preserve Yawgoog&rsquo;s story together.
+        </p>
+        <div class="btn-row">
+          <a href="get-involved.html" class="btn btn-gold">Get Involved</a>
+          <a href="who-am-i.html" class="btn btn-ghost">Meet the Producer</a>
+        </div>
+      </section>
+
     </div>
   </main>
 
